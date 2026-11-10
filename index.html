@@ -337,6 +337,26 @@ stacked.addEventListener('change', layout);
 stack.forEach((p) => new ResizeObserver(layout).observe(p));
 layout();
 
+// Frames load lazily. In portrait each frame fills the width, so WebKit would only start the
+// later live demos (each a full React app) during the first swipe, which makes it stutter.
+// Load a project's frames one at a time while it is still about a screen away.
+const warm = new IntersectionObserver((entries) => entries.forEach(({ isIntersecting, target }) => {
+  if (!isIntersecting) return;
+  warm.unobserve(target);
+  const queue = [...target.querySelectorAll('.rail [loading="lazy"]')];
+  const next = () => {
+    const el = queue.shift();
+    if (!el) return;
+    let done = false;
+    const go = () => { if (!done) { done = true; setTimeout(next, 150); } };
+    el.addEventListener('load', go, { once: true });
+    setTimeout(go, 1500); // Frames that already loaded fire no load event.
+    el.loading = 'eager';
+  };
+  next();
+}), { rootMargin: '100% 0px' });
+stack.forEach((p) => warm.observe(p));
+
 // Tabbing into a covered project brings the focused control out from under the next one.
 document.addEventListener('focusin', (e) => {
   const plate = stacked.matches && e.target.closest('.plate');
