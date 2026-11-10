@@ -49,7 +49,8 @@ h1, h2, p, figure, dl { margin: 0; }
   padding-block: clamp(32px, 7svh, 72px) clamp(40px, 9svh, 96px);
   border-top: 1px solid var(--line);
 }
-.plate-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, var(--aside)); gap: 16px 32px; align-items: end; padding: 0 var(--gutter) clamp(20px, 4svh, 36px); }
+/* Title columns never shrink below their longest word, so enlarged text can't overlap the column beside it. */
+.plate-head { display: grid; grid-template-columns: minmax(min-content, 1fr) minmax(0, var(--aside)); gap: 16px 32px; align-items: end; padding: 0 var(--gutter) clamp(20px, 4svh, 36px); }
 h2 { font: 300 clamp(3.25rem, 9vw, 6rem)/.95 'Funnel Display', sans-serif; letter-spacing: -.03em; }
 .plate-head p { text-wrap: pretty; }
 .facts { color: var(--fg-2); margin-top: 6px; }
@@ -75,13 +76,13 @@ h2 { font: 300 clamp(3.25rem, 9vw, 6rem)/.95 'Funnel Display', sans-serif; lette
 @media (hover: hover) and (pointer: fine) { .axis button:hover { color: var(--fg); } }
 .now { position: absolute; left: 0; top: 0; width: 1px; height: 54px; background: var(--fg); }
 
-.close { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, var(--aside)); gap: 24px 32px; padding: clamp(56px, 12svh, 128px) var(--gutter) 32px; border-top: 1px solid var(--line); }
+.close { display: grid; grid-template-columns: minmax(min-content, 1fr) minmax(0, var(--aside)); gap: 24px 32px; padding: clamp(56px, 12svh, 128px) var(--gutter) 32px; border-top: 1px solid var(--line); }
 .close h2 a { display: inline-block; transform-origin: left center; text-decoration-thickness: 2px; text-underline-offset: .12em; transition: transform 160ms var(--ease-out); }
 .close h2 a:active { transform: scale(.98); }
 #top:focus, #about:focus, #imprint:focus { outline: none; }
 .close p { color: var(--fg-2); align-self: end; }
 
-.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, var(--aside)); gap: 32px; padding: clamp(32px, 7svh, 72px) var(--gutter) clamp(56px, 12svh, 128px); border-top: 1px solid var(--line); }
+.about { display: grid; grid-template-columns: minmax(min-content, 1fr) minmax(0, var(--aside)); gap: 32px; padding: clamp(32px, 7svh, 72px) var(--gutter) clamp(56px, 12svh, 128px); border-top: 1px solid var(--line); }
 .about h2 { margin-bottom: clamp(20px, 4svh, 36px); }
 .portrait { position: relative; display: block; width: 100%; max-width: 760px; aspect-ratio: 8 / 5; padding: 0; border: 0; background: #0d0d0c; cursor: crosshair; overflow: hidden; touch-action: pan-y; -webkit-tap-highlight-color: transparent; }
 .portrait img, .portrait canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -92,7 +93,7 @@ h2 { font: 300 clamp(3.25rem, 9vw, 6rem)/.95 'Funnel Display', sans-serif; lette
 .about-copy p + p { margin-top: 1em; color: var(--fg-2); }
 .focus { list-style: none; margin: 28px 0 0; padding: 0; }
 .focus li { padding: 10px 0; border-top: 1px solid var(--line); }
-.imprint { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, var(--aside)); gap: 8px 32px; padding: 24px var(--gutter) 32px; border-top: 1px solid var(--line); color: var(--fg-2); font-size: .9375rem; }
+.imprint { display: grid; grid-template-columns: minmax(min-content, 1fr) minmax(0, var(--aside)); gap: 8px 32px; padding: 24px var(--gutter) 32px; border-top: 1px solid var(--line); color: var(--fg-2); font-size: .9375rem; }
 .imprint h2 { font: 500 1rem/1.45 'Funnel Sans', system-ui, sans-serif; letter-spacing: 0; color: var(--fg); }
 .imprint address { font-style: normal; }
 .law { align-self: start; }
@@ -101,7 +102,8 @@ h2 { font: 300 clamp(3.25rem, 9vw, 6rem)/.95 'Funnel Display', sans-serif; lette
 .privacy summary { display: flex; align-items: center; gap: 8px; padding: 22px var(--gutter); cursor: pointer; list-style: none; }
 .privacy summary::-webkit-details-marker { display: none; }
 .privacy summary:focus-visible { outline-offset: -4px; }
-.privacy h2 { font: 500 1rem/1.45 'Funnel Sans', system-ui, sans-serif; letter-spacing: 0; color: var(--fg); }
+.privacy-title { font: 500 1rem/1.45 'Funnel Sans', system-ui, sans-serif; color: var(--fg); }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .privacy summary svg { width: 12px; height: 12px; fill: none; stroke: var(--fg); stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--ease-out); }
 .privacy[open] summary svg { transform: rotate(180deg); }
 .privacy::details-content { block-size: 0; overflow: clip; transition: block-size 260ms var(--ease-out), content-visibility 260ms allow-discrete; }
@@ -151,18 +153,20 @@ h2 { font: 300 clamp(3.25rem, 9vw, 6rem)/.95 'Funnel Display', sans-serif; lette
   </div>
 </header>
 <main><div id="plates"></div><section class="about" id="about" aria-labelledby="t-about"></section></main>
-<footer class="close">
+<footer>
+<div class="close">
   <h2><a id="mail2" href="#">Get in touch</a></h2>
   <p>I’m always curious and open to new opportunities to grow and learn. If you’re building something interesting, say hi.</p>
-</footer>
-<aside class="imprint" id="imprint" aria-labelledby="t-imprint">
+</div>
+<section class="imprint" id="imprint" aria-labelledby="t-imprint">
   <h2 id="t-imprint">Imprint</h2>
-  <p class="law">Angaben gemäß § 5 DDG</p>
+  <p class="law" lang="de">Angaben gemäß § 5 DDG</p>
   <address>Benjamin Fritz<br>Neuer Graben 55<br>44139 Dortmund<br>Germany<br><a href="mailto:hibenjaminfritz@gmail.com">hibenjaminfritz@gmail.com</a></address>
-</aside>
+</section>
 <details class="privacy" id="privacy">
-  <summary><h2>Privacy notice</h2><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v9M2 6.5l4 4 4-4"/></svg></summary>
+  <summary><span class="privacy-title">Privacy notice</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v9M2 6.5l4 4 4-4"/></svg></summary>
   <div class="privacy-body">
+    <h2 class="sr-only">Privacy notice</h2>
     <p>This website is a personal portfolio. It uses no cookies, analytics or tracking, and loads no content from third parties. Fonts and scripts are served from this website itself.</p>
     <h3>Controller</h3>
     <p>Benjamin Fritz, Neuer Graben 55, 44139 Dortmund, Germany, <a href="mailto:hibenjaminfritz@gmail.com">hibenjaminfritz@gmail.com</a></p>
@@ -176,7 +180,8 @@ h2 { font: 300 clamp(3.25rem, 9vw, 6rem)/.95 'Funnel Display', sans-serif; lette
   </div>
 </details>
 <p class="page-end"><a class="to-top" href="#top">Back to top<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 10.5v-9M2 5.5l4-4 4 4"/></svg></a></p>
-<noscript><p style="padding:24px">This draft renders its projects with JavaScript.</p></noscript>
+</footer>
+<noscript><p style="padding:24px">This page shows its projects with JavaScript.</p></noscript>
 <script src="shared/projects.js"></script>
 <script src="shared/art.js"></script>
 <script src="shared/vendor/blossom-carousel-web.umd.js"></script>
@@ -196,13 +201,13 @@ document.getElementById('plates').innerHTML = P.projects.map((p) => `
   </header>
   <div class="stage">
     <blossom-carousel class="rail" tabindex="0" role="group" aria-label="${p.name}, ${p.slides.length} frames. Use the left and right arrow keys to move.">
-      ${p.slides.map((s) => `<figure class="shot"><div class="frame">${Art.html(s.art, s.title)}</div><figcaption><b class="cap">${s.title}</b><span>${s.note}</span></figcaption></figure>`).join('')}
+      ${p.slides.map((s) => `<figure class="shot"><div class="frame">${Art.html(s.art, s.title, s.alt)}</div><figcaption><b class="cap">${s.title}</b><span>${s.note}</span></figcaption></figure>`).join('')}
     </blossom-carousel>
     <canvas class="ghosts" aria-hidden="true"></canvas>
   </div>
   <div class="chart">
     <canvas aria-hidden="true"></canvas>
-    <div class="axis">${p.slides.map((s, i) => `<button type="button" style="left:${(i / (p.slides.length - 1)) * 100}%">${s.axis || s.kind.replace(' prototype', '')}</button>`).join('')}</div>
+    <div class="axis" role="group" aria-label="${p.name} frames">${p.slides.map((s, i) => `<button type="button" style="left:${(i / (p.slides.length - 1)) * 100}%">${s.axis || s.kind.replace(' prototype', '')}</button>`).join('')}</div>
     <i class="now" aria-hidden="true"></i>
   </div>
   <i class="shade" aria-hidden="true"></i>
@@ -274,10 +279,20 @@ document.querySelectorAll('.plate').forEach((plate) => {
     },
   });
   ticks.forEach((b, i) => b.addEventListener('click', () => api.go(i)));
+  // Tabbing into a frame that is scrolled out of view brings that frame in, so focus stays visible.
+  // Focus entering a live demo fires inside its own document, so each demo reports it too (see below).
+  const reveal = (shot) => {
+    const i = api.slides.indexOf(shot);
+    if (i < 0) return;
+    const r = shot.getBoundingClientRect(), box = rail.getBoundingClientRect();
+    if (r.left < box.left - 1 || r.right > box.right + 1) api.go(i, true);
+  };
+  rail.addEventListener('focusin', (e) => reveal(e.target.closest('.shot')));
 
   // Live components run in their own document, so dragging their empty areas is forwarded to the rail.
   rail.querySelectorAll('iframe').forEach((frame) => frame.addEventListener('load', () => {
     const doc = frame.contentDocument;
+    doc.addEventListener('focusin', () => reveal(frame.closest('.shot')));
     doc.addEventListener('pointerdown', (e) => {
       if (e.pointerType !== 'mouse' || e.button || e.target.closest('input, button, a, label, [role=tab], [role=radio]')) return;
       const startX = e.screenX, startLeft = rail.scrollLeft, startIndex = api.index, snap = rail.style.getPropertyValue('--snap-type');
@@ -585,7 +600,9 @@ function goToSection(el, animate) {
     btn.addEventListener('pointerenter', (e) => { if (ready && e.pointerType === 'mouse') { last = null; trail(cellAt(e)); } });
     btn.addEventListener('pointermove', (e) => { if (ready && (e.pointerType === 'mouse' || held)) trail(cellAt(e)); });
     btn.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') last = null; });
+    let pointer = '';
     btn.addEventListener('pointerdown', (e) => {
+      pointer = e.pointerType;
       if (!ready || e.pointerType === 'mouse') return;
       touched = true; held = true; last = cellAt(e);
       drop(last[0], last[1], 1.1, 3.4);
@@ -593,7 +610,8 @@ function goToSection(el, animate) {
     const release = () => { held = false; last = null; };
     btn.addEventListener('pointerup', release);
     btn.addEventListener('pointercancel', release);
-    btn.addEventListener('click', (e) => { if (e.detail === 0) setFull(!full); }); // Keyboard: instant photo.
+    // Keyboard, mouse and voice control toggle the photo. Touch holds it instead.
+    btn.addEventListener('click', (e) => { if (e.detail === 0 || pointer !== 'touch') setFull(!full); pointer = ''; });
 
     // Touch has no hover, so one drop falls when the portrait comes into view, as an invitation.
     if (!hoverable.matches) {

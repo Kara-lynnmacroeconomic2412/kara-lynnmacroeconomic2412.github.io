@@ -15,9 +15,9 @@
   };
 
   window.Art = {
-    html(key, title) {
+    html(key, title, alt) {
       const [kind, name] = key.split(':');
-      if (kind === 'img') return `<div class="art art-embed art-shot"><img src="${name}" alt="${esc(title)}" width="1600" height="1000" loading="lazy" decoding="async"></div>`;
+      if (kind === 'img') return `<div class="art art-embed art-shot"><img src="${name}" alt="${esc(alt || title)}" width="1600" height="1000" loading="lazy" decoding="async"></div>`;
       if (EMBEDS[kind]) {
         const { src, label, dark } = EMBEDS[kind];
         return `<div class="art art-embed${dark ? ' on-dark' : ''}"><iframe src="${src}#${name}" title="${esc(title)}, ${label}" loading="lazy"></iframe></div>`;
