@@ -45,5 +45,16 @@ window.PORTFOLIO = {
         { art: 'note-kinder', kind: 'Process', axis: 'Engineering', title: 'Secret until the reveal', note: 'How a vote stays hidden.' },
       ],
     },
+    {
+      id: 'buerokompass', name: 'Bürokompass',
+      meta: 'Design and engineering, 2026. React, Tailwind and Cloudflare D1, with job research by Codex. In German, for its one user. Invented listings.',
+      summary: 'Bürokompass is a job board made for one person’s search: office roles around Dortmund from three job portals, gathered into one calm list with favourites and a distance filter. Made from the research brief to the distance maths.',
+      slides: [
+        { art: 'bk:list', kind: 'Live product', axis: 'Collection', title: 'The job collection', note: 'Filter by distance, keep favourites and hide what doesn’t fit.' },
+        { art: 'img:shared/buerokompass/overview.jpg', alt: 'Bürokompass overview: a search field, a distance slider set to Dortmund only, tabs for all, new, favourite and hidden jobs, the first job card, and a side panel counting nine unseen jobs.', kind: 'Screen', axis: 'Overview', title: 'Unseen jobs first', note: 'Seen jobs fade back, and portal searches are one click away.' },
+        { art: 'img:shared/buerokompass/save.jpg', alt: 'Dialog for saving a job: a pasted Stepstone link, with the job title, company and town filled in automatically and a button to save it to favourites.', kind: 'Screen', axis: 'Save', title: 'Save any listing', note: 'Paste a link, and the title, company and town fill in.' },
+        { art: 'note-buero', kind: 'Process', axis: 'Research', title: 'Researched by an agent', note: 'How the list fills itself.' },
+      ],
+    },
   ],
 };

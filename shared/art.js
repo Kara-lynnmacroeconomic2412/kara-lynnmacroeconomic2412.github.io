@@ -5,6 +5,7 @@
 
   const NOTES = {
     'note-highscore': () => note('It keeps working when a source doesn’t.', 'Highscore fetches design, code and content metrics live on load. If one source fails, that pillar falls back to its latest stored snapshot, so the dashboard stays useful.', ['Partial live data merges over the snapshot', 'A weekly cron job keeps the trend history growing', 'Any view exports as JSON or CSV']),
+    'note-buero': () => note('An agent does the searching. The page stays honest.', 'Every weekday morning, Codex searches Stepstone, Indeed and the Federal Employment Agency for office roles within 30 km of Dortmund, and a validation script merges what it finds into the collection.', ['Listings merge by portal ID, so nothing seen or saved is lost', 'Each run records which sources worked, and the page says when results are incomplete', 'Distances come from town centres, and the page says so']),
     'note-kinder': () => note('Votes stay secret until the reveal.', 'Other players’ votes are removed by the API until the reveal, not merely hidden by CSS, so there is nothing to find in the browser.', ['Only hashed participant secrets are stored', 'Conditional writes keep simultaneous votes safe', 'Rooms expire after seven days']),
   };
 
@@ -12,6 +13,7 @@
     brix: { src: 'shared/brix/index.html', label: 'live brix/react component' },
     hs: { src: 'shared/highscore/index.html', label: 'live Highscore component', dark: true },
     kc: { src: 'shared/kindercards/index.html', label: 'playable Kinder Cards round', dark: true },
+    bk: { src: 'shared/buerokompass/index.html', label: 'live Bürokompass app' },
   };
 
   window.Art = {

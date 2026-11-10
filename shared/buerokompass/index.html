@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bürokompass demo</title>
+<link rel="stylesheet" href="demo.css">
+<style>
+@font-face { font-family: 'Geist'; src: url('Geist-Variable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+body { --font-geist-sans: 'Geist'; }
+/* Contrast: the app's lighter greys measured 2.9–4.49:1. Each is darkened just enough to reach 4.5:1 on its own background. */
+.subline, .filter-chip, .distance-ticks, .unknown-distance, .job-distance, .pagination, .job-card.seen h3 { color: #627087; }
+.searchbar { color: #69768b; }
+.job-meta, .sources p, .distance-filter p { color: #657186; }
+.job-facts { color: #667286; }
+.text-button, .small-note { color: #637086; }
+.result-count, .optional { color: #66707f; }
+.job-card.seen .new-badge { color: #5d6a7e; }
+.source-name small { color: #67758c; }
+.connection-note { color: #697689; }
+.portal-search label { color: #65778d; }
+.tip { color: #5f718a; }
+footer { color: #647082; }
+.color-2 { color: #a15b36; }
+</style>
+</head>
+<body class="antialiased">
+<div id="root"></div>
+<script src="demo.js"></script>
+</body>
+</html>
