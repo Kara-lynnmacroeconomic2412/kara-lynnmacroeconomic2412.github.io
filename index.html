@@ -18,6 +18,7 @@ html { background: var(--bg); -webkit-text-size-adjust: 100%; scrollbar-color: #
 body { margin: 0; color: var(--fg); font: 400 1rem/1.5 'Funnel Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 ::selection { background: var(--fg); color: var(--bg); }
 a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
+abbr[title] { text-decoration: none; }
 :focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 h1, h2, p, figure, dl { margin: 0; }
 
@@ -180,7 +181,7 @@ h2 { font: 300 clamp(3.25rem, 9vw, 6rem)/.95 'Funnel Display', sans-serif; lette
 <script>
 const P = PORTFOLIO;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.getElementById('line').textContent = `${P.role}. ${P.line}`;
+document.getElementById('line').innerHTML = `${P.role}. ${P.line}`;
 document.getElementById('mail').href = document.getElementById('mail2').href = P.contact.href;
 document.getElementById('name').innerHTML = `<span class="real">${P.name}</span>` + Array.from({ length: 8 }, (_, n) => `<span class="ghost" aria-hidden="true" style="--i:${n + 1}">${P.name}</span>`).join('');
 

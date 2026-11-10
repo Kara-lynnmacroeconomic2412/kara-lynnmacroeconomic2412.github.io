@@ -2,7 +2,7 @@
 window.PORTFOLIO = {
   name: 'Benjamin Fritz',
   role: 'Senior Design Engineer / Manager',
-  line: 'I design interfaces, then I build them.',
+  line: 'I design interfaces, then I build them. <abbr title="Accessibility">A11Y</abbr> first \u2013 AI second.',
   contact: { label: 'Email', href: 'mailto:hibenjaminfritz@gmail.com', address: 'hibenjaminfritz@gmail.com' },
   about: {
     paragraphs: [
